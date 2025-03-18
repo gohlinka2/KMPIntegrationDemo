@@ -12,6 +12,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    defaultLibrariesExtensionName = "kmpLibs"
 }
 
 rootProject.name = "KMPIntegrationDemo"

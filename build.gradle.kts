@@ -1,5 +1,4 @@
 plugins {
-    //trick: for the same plugin versions in all sub-modules
-    alias(libs.plugins.androidLibrary).apply(false)
-    alias(libs.plugins.kotlinMultiplatform).apply(false)
+    id(kmpLibs.plugins.androidLibrary.get().pluginId) version kmpLibs.versions.agp.get() apply false
+    id(kmpLibs.plugins.kotlinMultiplatform.get().pluginId) version kmpLibs.versions.kotlin.get() apply false
 }
