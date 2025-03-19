@@ -1,5 +1,5 @@
 # Introduction
-This is a KMP repository for a minimal project that showcases a git-subtree setup for sharing KMP code between 3 repositories: [Android](https://github.com/gohlinka2/KMPIntegrationDemoAndroid), [iOS](https://github.com/gohlinka2/KMPIntegrationDemoiOS) and KMP itself. The idea is to share source code between the platforms as opposed to sharing binaries, which makes iteration and debugging much faster and attempts to minimize the inequalities between the Android/iOS developer experiences (to a certain degree). When we share source, we can also look at KMP differently - not as a library/dependency that is developed independently and then just consumed in our project, but as a part of the app's codebase, in the sense that we can edit KMP and native code as a unit (e.g. when building a feature, we can do changes to both KMP and native code together and debug immediatelly). If course eventually we need to push our changes to the KMP code back upstream so that the other platform can grab it, which is what this doc describes. More information about this approach can be found in [this article from TouchLab](https://touchlab.co/kmp-teams-use-source).
+This is a KMP repository for a minimal project that showcases a git-subtree setup for sharing KMP code between 3 repositories: [Android](https://github.com/gohlinka2/KMPIntegrationDemoAndroid), [iOS](https://github.com/gohlinka2/KMPIntegrationDemoiOS) and KMP itself. The idea is to share source code between the platforms as opposed to sharing binaries, which makes iteration and debugging much faster and attempts to minimize the inequalities between the Android/iOS developer experiences (to a certain degree). When we share source, we can also look at KMP differently - not as a library/dependency that is developed independently and then just consumed in our project, but as a part of the app's codebase, in the sense that we can edit KMP and native code as a unit (e.g. when building a feature, we can do changes to both KMP and native code together and debug immediately). Of course eventually we need to push our changes to the KMP code back upstream so that the other platform can grab it, which is what this doc describes. More information about this approach can be found in [this article from TouchLab](https://touchlab.co/kmp-teams-use-source).
 
 For integration of the KMP source into the native repos and sharing changes back up to the KMP repo, we use git-subtree (alternative to git-submodules, etc.).
 
@@ -13,7 +13,7 @@ To start:
 
 In KMP, create main-android and main-ios branches from the main branch. For now, they are the same as main, but they will each mirror the main branches of the native repos, but only have commits related to KMP.
 
-In the following lines, there are 2 approaches - either with `--squash` and without it. Both have an advantage and a disadvantage and it is up to you to decide where you want to make compromises. I will describe both.
+In the following lines, there are 2 approaches - either with `--squash` and without it. Both have an advantage and a disadvantage and it is up to you to decide where you want to make compromises. I will describe both. You can also see screenshots of how they affect the history graph at the end.
 
 To integrate KMP into native code (let's say the Android part now):
 
@@ -53,8 +53,37 @@ The choice of to squash or not to squash is up to you.
 If there are any conflicts, you resolve them. Then go through CR process as usual, and once this integration PR gets merged, the backport CI check runs again to push the changes we just made to main-ios. If you check main-ios in the KMP repo, you can see that it now also contains the commits prefixed with [KMP-And].
 
 Note: the CI check is not included here, but it should not be difficult to build it with GitHub Actions.
-￼
+
 Reference: https://medium.com/p/mastering-git-subtrees-943d29a798ec
+
+## History differences with and without `--squash`
+
+Here is an example commit history after building two features, the latter of which has conflicts (note: the screenshots are not from this repo, but they illustrate the point).
+
+Regardless of the approach, the history of the KMP repo is clean. The differences are in the native repos.
+
+KMP:
+![kmp](readme_images/history_kmp.png)
+
+### Without `--squash`
+
+iOS:
+
+![history_full_ios](readme_images/history_full_ios.png)
+
+Android:
+
+![history_full_android](readme_images/history_full_android.png)
+
+### With `--squash`
+
+iOS:
+
+![history_squashed_ios](readme_images/history_squashed_ios.png)
+
+Android:
+
+![history_squashed_android](readme_images/history_squashed_android.png)
 
 # How builds work in Android
 
