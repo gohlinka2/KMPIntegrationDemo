@@ -4,6 +4,6 @@ class Greeter {
     private val platform: Platform = getPlatform()
 
     fun greet(): String {
-        return "Hello, ${platform.name}!"
+        return "Hello KMP from Android!"
     }
 }
