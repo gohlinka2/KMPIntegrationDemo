@@ -42,7 +42,7 @@ The commits we made to KMP in the native repo are now mirrored in the KMP repo, 
 
 To do that (we are now switching context to the other platform, let’s suppose iOS):
 
-`git subtree pull --prefix=kmp kmp v2/main-android --squash`
+`git subtree pull --prefix=kmp kmp main-android --squash`
 
 This pulls in and merges the changes from the android counterpart.
 - If you `--squash`, you will only see a squash & merge commit, and you cannot see the individual commits made in Android. You can check them out in the KMP branch clearly, but not in your iOS repo where you will most probably be looking at the files.
