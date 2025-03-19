@@ -56,6 +56,10 @@ Note: the CI check is not included here, but it should not be difficult to build
 
 Reference: https://medium.com/p/mastering-git-subtrees-943d29a798ec
 
+## Example workflow with PRs:
+
+Start [here](https://github.com/gohlinka2/KMPIntegrationDemoAndroid/pull/1).
+
 ## History differences with and without `--squash`
 
 Here is an example commit history after building two features, the latter of which has conflicts (note: the screenshots are not from this repo, but they illustrate the point).
